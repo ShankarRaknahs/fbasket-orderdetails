@@ -11,8 +11,8 @@ const getData = async (url = "") => {
     const error = response;
     throw error;
   }
-  const data = await response.json();
-  return data;
+  const resData = await response.json();
+  return resData;
 };
 
 export default getData;

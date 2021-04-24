@@ -1,11 +1,11 @@
-const postData = async (url = "", data = {}) => {
+const postData = async (url = "", reqData = {}) => {
   const options = {
     method: "POST",
     cache: "no-cache",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(reqData),
   };
 
   const response = await fetch(url, options);
@@ -14,8 +14,8 @@ const postData = async (url = "", data = {}) => {
     const error = response;
     throw error;
   }
-  const data = await response.json();
-  return data;
+  const resData = await response.json();
+  return resData;
 };
 
 export default postData;

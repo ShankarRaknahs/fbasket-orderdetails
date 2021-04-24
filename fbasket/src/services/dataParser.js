@@ -28,3 +28,7 @@ export const productsDataParser = async (unParsedData) => {
 
   return parsedData;
 };
+
+export const ordersDataParser = async (unParsedData) => {
+  return unParsedData;
+};

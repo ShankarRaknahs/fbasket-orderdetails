@@ -3,7 +3,7 @@ import { COLOR } from "../../config/theme.config";
 
 export const useStyles = makeStyles((theme) => ({
   container: {
-    height: "100vh",
+    height: "90vh",
     borderRight: `0.1px solid ${COLOR.BORDER}`,
     padding: 20,
     paddingTop: 60,

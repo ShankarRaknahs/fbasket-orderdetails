@@ -2,21 +2,15 @@ import { Button, Grid, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import { useStyles } from "../Table/styles";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import IconButton from "@material-ui/core/IconButton";
-import { useState } from "react";
 
 const ModifyOrder = ({ productId }) => {
   const products = useSelector((state) => state.allProducts.products);
   const selectedOrders = products.filter(
     (product) => product.product_id === productId
   );
-
-  const [activeOrderToModify, setActiveOrderToModify] = useState({});
-
-  const classes = useStyles();
 
   return (
     <Grid container direction="column" spacing={1}>
@@ -40,12 +34,7 @@ const ModifyOrder = ({ productId }) => {
               <TextField
                 select
                 value={selectedOrder.status}
-                onChange={({ target: { value } }) => {
-                  setActiveOrderToModify({
-                    orderId: selectedOrder.orderId,
-                    order_status: value,
-                  });
-                }}
+                onChange={({ target: { value } }) => {}}
               >
                 <MenuItem value="Processing">Processing</MenuItem>
                 <MenuItem value="Done"> Done </MenuItem>

@@ -9,10 +9,14 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useStyles } from "./styles";
-import { Button } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
-import Modal from "@material-ui/core/Modal";
-import ModifyOrder from "./ModifyOrder";
+import ModifyOrder from "../Order/ModifyOrder";
+
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const ListItems = ({ rows, columns }) => {
   const classes = useStyles();
@@ -20,31 +24,21 @@ const ListItems = ({ rows, columns }) => {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(ROWS_PER_PAGE);
-
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
-
   const [activeId, setActiveId] = useState("");
 
-  const handleOpen = (productId) => {
-    setOpen(true);
+  const [modalOpen, setModalOpen] = React.useState(false);
+
+  const handleClickOpen = (productId) => {
+    setModalOpen(true);
     setActiveId(productId);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setModalOpen(false);
   };
 
-  function getModalStyle() {
-    const top = 50;
-    const left = 50;
-
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
-  }
+  console.log(rows);
+  console.log(columns);
 
   const RenderList = !rows ? (
     <CircularProgress color="primary" />
@@ -60,31 +54,34 @@ const ListItems = ({ rows, columns }) => {
                   ? column.format(value)
                   : value}
                 {column.id === "edit_order" ? (
-                  <Button
-                    endIcon={<EditIcon />}
-                    variant="outlined"
-                    size="small"
-                    onClick={() => handleOpen(row.product_id)}
-                    className={classes.button}
-                  >
-                    Order details
-                  </Button>
+                  <>
+                    <Button
+                      endIcon={<EditIcon />}
+                      variant="outlined"
+                      size="small"
+                      onClick={() => handleClickOpen(row.product_id)}
+                      className={classes.button}
+                    >
+                      Order details
+                    </Button>
+
+                    <Dialog
+                      open={modalOpen}
+                      onClose={handleClose}
+                      className={classes.modalPaper}
+                    >
+                      <DialogTitle>Modify the Order details</DialogTitle>
+                      <DialogContent className={classes.moreWidth}>
+                        <ModifyOrder productId={activeId} />
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                          Cancel
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                  </>
                 ) : null}
-                {
-                  <Modal
-                    open={open}
-                    overlayStyle={{ backgroundColor: "transparent" }}
-                    onClose={handleClose}
-                  >
-                    <div style={modalStyle} className={classes.modalPaper}>
-                      {" "}
-                      <ModifyOrder productId={activeId} />
-                      <Button variant="outlined" onClick={handleClose}>
-                        Cancel
-                      </Button>
-                    </div>
-                  </Modal>
-                }
               </TableCell>
             );
           })}

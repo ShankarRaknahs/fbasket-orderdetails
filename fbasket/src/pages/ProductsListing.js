@@ -15,8 +15,8 @@ const ProductsListing = () => {
   useEffect(() => {
     getData(CONFIG.SERVER_URL + CONFIG.GET_PRODUCTS_URL)
       .then((response) => {
-        dispatch(setProducts(response.data));
-        return productsDataParser(response.data);
+        dispatch(setProducts(response));
+        return productsDataParser(response);
       })
       .catch((error) => {
         throw error;

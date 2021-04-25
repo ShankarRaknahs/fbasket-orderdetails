@@ -18,7 +18,7 @@ export const productsDataParser = async (unParsedData) => {
 
     const parsedObj = {
       product_id: productId,
-      order_status: orderStatus,
+      status: orderStatus,
       quantity: groupQty,
       order_count: productIdGroup.length,
     };

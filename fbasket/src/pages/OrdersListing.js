@@ -16,8 +16,8 @@ const OrdersListing = () => {
   useEffect(() => {
     getData(CONFIG.SERVER_URL + CONFIG.GET_ORDERS_URL)
       .then((response) => {
-        dispatch(setOrders(response.data));
-        return ordersDataParser(response.data);
+        dispatch(setOrders(response));
+        return ordersDataParser(response);
       })
       .catch((error) => {
         throw error;

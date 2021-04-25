@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   modalPaper: {
     position: "absolute",
-    width: "50%",
+    width: "100%",
     borderRadius: 10,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
@@ -21,5 +21,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   margin: {
     margin: 10,
+  },
+  moreWidth: {
+    width: 500,
   },
 }));

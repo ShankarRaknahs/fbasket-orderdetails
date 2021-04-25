@@ -1,8 +1,11 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useStyles } from "./styles";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import IconButton from "@material-ui/core/IconButton";
 
 const ModifyOrder = ({ productId }) => {
   const products = useSelector((state) => state.allProducts.products);
@@ -38,8 +41,16 @@ const ModifyOrder = ({ productId }) => {
                 <MenuItem value="Processing">Processing</MenuItem>
                 <MenuItem value="Done"> Done </MenuItem>
               </TextField>
-
-              <Typography variant="h3">{selectedOrder.quantity}</Typography>
+              <IconButton color="primary" component="span">
+                <RemoveIcon />
+              </IconButton>
+              <Typography variant="h6">{selectedOrder.quantity}</Typography>
+              <IconButton color="primary" component="span">
+                <AddIcon />
+              </IconButton>
+              <Button variant="contained" color="primary">
+                Update
+              </Button>
             </Grid>
           </div>
         );

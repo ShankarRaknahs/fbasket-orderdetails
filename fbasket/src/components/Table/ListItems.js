@@ -71,7 +71,11 @@ const ListItems = ({ rows, columns }) => {
                   </Button>
                 ) : null}
                 {
-                  <Modal open={open} onClose={handleClose}>
+                  <Modal
+                    open={open}
+                    overlayStyle={{ backgroundColor: "transparent" }}
+                    onClose={handleClose}
+                  >
                     <div style={modalStyle} className={classes.modalPaper}>
                       {" "}
                       <ModifyOrder productId={activeId} />
